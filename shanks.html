@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <form id="form" method="GET">
+username:<input type="text" name="username" placeholder="请输入username">
+title:<input type="text" name="title" placeholder="请输入title">
+description:<input type="text" name="description" placeholder="请输入description">
+<a href="javascript:void(0);" style="width:60px;line-height: 28px;line-height: 28px;text-align: center;color: black;border: 1px solid #666;text-decoration: none;display:block;
+border-radius: 6px;margin: 0 auto;margin-top: 50px;" id="btn">submit</a>
+
+</form>
+<div id="txtHint"></div>
+</body>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+
+var btn=document.getElementById("btn");
+btn.onclick=function(){
+  
+  function showUser()
+{
+  var str=$("#form").serialize()||""
+    
+     if (str=="")
+     {
+           document.getElementById("txtHint").innerHTML="";
+           return;
+     } //如果没有传参的话那么就结束
+    if (window.XMLHttpRequest)
+    {
+           // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+           xmlhttp=new XMLHttpRequest();
+     }//兼容判断
+     else
+     {
+           // IE6, IE5 浏览器执行代码
+           xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+     }//兼容判断
+     xmlhttp.onreadystatechange=function()
+     {
+          if (xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+                document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+          }
+     }
+     xmlhttp.open("GET","connect.php?"+str,true);
+     xmlhttp.send();
+}
+showUser()
+
+}
+ 
+</script>
+</html>
